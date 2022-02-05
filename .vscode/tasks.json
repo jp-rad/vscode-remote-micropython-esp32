@@ -1,0 +1,37 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build - micropython esp32",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "BUILD=$BUILD_MPY"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "/home/vscode/esp/micropython/ports/esp32"
+            }
+        },
+        {
+            "label": "clean - micropython esp32",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "clean",
+                "BUILD=$BUILD_MPY"
+            ],
+            "problemMatcher": [],
+            "group": "build",
+            "options": {
+                "cwd": "/home/vscode/esp/micropython/ports/esp32"
+            }
+        }
+    ]
+}
