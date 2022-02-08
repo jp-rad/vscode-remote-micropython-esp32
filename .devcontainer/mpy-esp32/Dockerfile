@@ -30,21 +30,24 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 
 # export.sh
-#RUN echo ". $IDF_PATH/export.sh" >> /home/vscode/.profile
-RUN echo '' >> /home/vscode/.profile
-RUN echo '# set IDF tools path' >> /home/vscode/.profile
-RUN echo 'if [ -f "$IDF_PATH/export.sh" ] ; then' >> /home/vscode/.profile
-RUN echo '    . "$IDF_PATH/export.sh"' >> /home/vscode/.profile
-RUN echo 'fi' >> /home/vscode/.profile
-RUN echo '' >> /home/vscode/.profile
+RUN echo '' >> /home/vscode/.profile \
+    && echo '# set IDF tools path' >> /home/vscode/.profile \
+    && echo 'if [ -f "$IDF_PATH/export.sh" ] ; then' >> /home/vscode/.profile \
+    && echo '    . "$IDF_PATH/export.sh"' >> /home/vscode/.profile \
+    && echo 'fi' >> /home/vscode/.profile \
+    && echo '' >> /home/vscode/.profile
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
 # Install micropython and pre-build.
+RUN echo '# micropython sourcecode path' >> /home/vscode/.profile \
+    && echo 'export SRC_MICROPYTHON=/home/vscode/esp/micropython' >> /home/vscode/.profile \ 
+    && echo '' >> /home/vscode/.profile
 USER vscode
 WORKDIR /home/vscode/esp
 ARG MPY_TAG="master"
-RUN git clone --branch=${MPY_TAG} --depth=1 https://github.com/micropython/micropython.git micropython
-RUN cd micropython && make -C mpy-cross && cd ports/esp32 && make submodules
+RUN git clone --branch=${MPY_TAG} --depth=1 https://github.com/micropython/micropython.git micropython \
+    && make -C micropython/mpy-cross \
+    && make -C micropython/ports/esp32 submodules
