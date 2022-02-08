@@ -32,8 +32,6 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "gcc -v",
-	// The build directory, 'BUILD', using in /home/vscode/esp/micropython/ports/esp32/Makefile.
-	"postCreateCommand": "echo 'export BUILD_MPY=${containerWorkspaceFolder}/.build' >> /home/vscode/.profile",
 
 	// Comment out this line to run as root instead.
 	"remoteUser": "vscode"
